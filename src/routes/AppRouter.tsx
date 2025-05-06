@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import Todos from "../pages/Todos";
 
 
 export const AppRouter: React.FC = () => {
@@ -7,7 +8,19 @@ export const AppRouter: React.FC = () => {
     <div className="appContainer">
 
     <Routes>
-      <Route path="/" element={<Navigate to="/main" />} />
+      <Route path="/todos" element={<Todos />} />
+      {/* <Route
+        path="/logout"
+        element={
+          (() => {
+          localStorage.clear();
+          sessionStorage.clear();
+          return <Navigate to="/todos" />;
+          })()
+        }
+      /> */}
+      <Route path="/" element={<Navigate to="/todos" />} />
+
     </Routes>
     </div>
   );

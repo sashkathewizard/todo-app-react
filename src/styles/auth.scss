@@ -44,3 +44,28 @@
 .auth-button:hover {
   background-color: $main;
 }
+
+.auth-footer {
+  margin-top: 1rem;
+  text-align: center;  
+
+  .auth-text {
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: #666;
+  }  
+  
+  .auth-button-secondary {
+      background-color: transparent;
+      border: 1px solid #007bff;
+      color: #007bff;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;  
+      &:hover {
+          background-color: #007bff;
+          color: #fff;
+      }
+  }
+}
