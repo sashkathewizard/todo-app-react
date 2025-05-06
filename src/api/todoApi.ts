@@ -34,12 +34,25 @@ export const deleteTodoById = async (id: string) => {
   }
 }
 
-export const updateTodoStatus = async (id: string, status: string) => {
+export const updateTodoStatusById = async (id: string, status: string) => {
   const accessToken = getStorage(SessionType.AccessToken);
 
   await axios.patch(
-    `${BASE_URL}/todos/${id}`,
+    `${BASE_URL}/tasks/${id}`,
     { status },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  )
+}
+export const createTodo = async (title: string, description: string) => {
+  const accessToken = getStorage(SessionType.AccessToken);
+
+  await axios.post(
+    `${BASE_URL}/tasks`,
+    { title, description },
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,

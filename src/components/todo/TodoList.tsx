@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteTodoById, fetchUserTodos } from "../../api/todoApi";
+import { deleteTodoById, fetchUserTodos, updateTodoStatusById } from "../../api/todoApi";
 import { TodoStatus } from "../../utils/enums/status.enum";
 import Todo from "./Todo";
 
@@ -28,17 +28,21 @@ const TodoList = () => {
     loadTodos();
   }, []);
 
-  const toggleComplete = (id: string) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id
-          ? {
-              ...todo,
-              status: todo.status === TodoStatus.NEW ? TodoStatus.DONE : TodoStatus.NEW,
-            }
-          : todo
-      )
-    );
+  const toggleComplete = async (id: string, currentStatus: string) => {
+    const newStatus =
+      currentStatus === TodoStatus.NEW ? TodoStatus.DONE : TodoStatus.NEW;
+  
+    try {
+      await updateTodoStatusById(id, newStatus);
+  
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.id === id ? { ...todo, status: newStatus } : todo
+        )
+      );
+    } catch (error) {
+      console.error("Failed to update status", error);
+    }
   };
 
   const deleteTodo = async (id: string) => {

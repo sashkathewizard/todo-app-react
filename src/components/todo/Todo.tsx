@@ -7,7 +7,7 @@ interface TodoProps {
   title: string;
   description?: string;
   status: TodoStatus;
-  onToggleComplete: (id: string) => void;
+  onToggleComplete: (id: string, currentStatus: string) => void;
   onDelete: (id: string) => void;
 }
 
@@ -21,7 +21,7 @@ const Todo: React.FC<TodoProps> = ({ id, title, description, status, onToggleCom
         {description && <p className="todo-description">{description}</p>}
       </div>
       <div className="todo-actions">
-        <button className="todo-toggle" onClick={() => onToggleComplete(id)}>
+        <button className="todo-toggle" onClick={() => onToggleComplete(id, status)}>
           {completed ? TodoStatus.IN_PROGRESS : TodoStatus.DONE}
         </button>
         <button className="todo-delete" onClick={() => onDelete(id)}>
